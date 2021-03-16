@@ -34,34 +34,32 @@ class EventListener implements Listener {
             $event->setCancelled();
             return;
         }
-        if (!$allowChat) {
-            $player = $event->getPlayer();
-            $perm = "chatmute";
-            if ($player->isPermissionSet($perm)) {
-                $event->setCancelled();
-                return;
-            }
-            if ($this->plugin->config->get("per-world-chat") == true) {
-                $format = $this->getFormattedMessage($player, $event->getMessage());
-                $configNode = $this->plugin->config->get("enable-formatter");
-                if (isset($configNode) && $configNode) {
-                    foreach ($player->getServer()->getOnlinePlayers() as $player) {
-                        if ($player->getLevel()->getName() == $player->getLevel()->getName()) {
-                            $player->sendMessage($format);
-                        }
-                    }
-                    $player->getServer()->getLogger()->info($format);
-                    $event->setCancelled();
-                    return;
-                }
-            }
+        $player = $event->getPlayer();
+        $perm = "chatmute";
+        if ($player->isPermissionSet($perm)) {
+            $event->setCancelled();
+            return;
+        }
+        if ($this->plugin->config->get("per-world-chat") == true) {
             $format = $this->getFormattedMessage($player, $event->getMessage());
             $configNode = $this->plugin->config->get("enable-formatter");
             if (isset($configNode) && $configNode) {
-                $event->setFormat($format);
+                foreach ($player->getServer()->getOnlinePlayers() as $player) {
+                    if ($player->getLevel()->getName() == $player->getLevel()->getName()) {
+                        $player->sendMessage($format);
+                    }
+                }
+                $player->getServer()->getLogger()->info($format);
+                $event->setCancelled();
+                return;
             }
-            return;
         }
+        $format = $this->getFormattedMessage($player, $event->getMessage());
+        $configNode = $this->plugin->config->get("enable-formatter");
+        if (isset($configNode) && $configNode) {
+            $event->setFormat($format);
+        }
+        return;
     }
 
     public function onPlayerQuit(PlayerQuitEvent $event){ 
