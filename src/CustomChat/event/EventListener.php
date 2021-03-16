@@ -22,6 +22,7 @@ use onebone\economyapi\EconomyAPI;
 class EventListener implements Listener {
 
     private $plugin;
+    public $playerConfig;
 
     public function __construct(Main $plugin) {
         $this->plugin = $plugin;
@@ -33,8 +34,8 @@ class EventListener implements Listener {
             $event->setCancelled();
             return;
         }
-        if (!$allowChat || $allowChat == null) {
-            $player = $event->getPlayer ();
+        if (!$allowChat) {
+            $player = $event->getPlayer();
             $perm = "chatmute";
             if ($player->isPermissionSet($perm)) {
                 $event->setCancelled();
@@ -64,7 +65,7 @@ class EventListener implements Listener {
     }
 
     public function onPlayerQuit(PlayerQuitEvent $event){ 
-        $message = $this->config->get("CustomLeave");
+        $message = $this->plugin->config->get("CustomLeave");
         $player = $event->getPlayer();
         $event->setQuitMessage("");
         $message = str_replace("@Player", $event->getPlayer()->getDisplayName(), $message);
@@ -87,7 +88,7 @@ class EventListener implements Listener {
     }
 
     public function getFormattedMessage(Player $player, $message) {
-        $format = $this->config->get("chat-format");
+        $format = $this->plugin->config->get("chat-format");
         $this->playerConfig = $this->plugin->getPlayerConfig($player->getName());
         $purePerms = $this->plugin->getServer()->getPluginManager()->getPlugin("PurePerms");
         $isMultiWorldEnabled = $purePerms->getConfig()->get("enable-multiworld-formats");
@@ -96,8 +97,8 @@ class EventListener implements Listener {
         $format = str_replace("{Kills}", KillChat::getInstance()->getKills($player->getName()), $format); 
         $format = str_replace("{Deaths}", KillChat::getInstance()->getDeaths($player->getName()), $format); 
         $format = str_replace("{Money}", EconomyAPI::getInstance()->myMoney($player->getName()), $format); 
-        $format = str_replace("{WORLD_NAME}", $player->getLevel ()->getName (), $format);
-        $nick = $this->config->get($player->getName() > ".nick");
+        $format = str_replace("{WORLD_NAME}", $player->getLevel()->getName(), $format);
+        $nick = $this->playerConfig->get($player->getName() . ".nick");
         if ($nick != null) {
             $format = str_replace("{DISPLAY_NAME}", $nick, $format);
         } else {
@@ -110,7 +111,7 @@ class EventListener implements Listener {
         if ($playerTags != null) {
             $tags = $playerTags;
         } else {
-            $tags = $this->config->get("default-player-tags");
+            $tags = $this->plugin->config->get("default-player-tags");
         }
         if ($tags == null) {
             $tags = "";
@@ -122,7 +123,7 @@ class EventListener implements Listener {
         if ($playerPrefix != null) {
             $prefix = $playerPrefix;
         } else {
-            $prefix = $this->config->get("default-player-prefix");
+            $prefix = $this->plugin->config->get("default-player-prefix");
         }
         if ($prefix == null) {
             $prefix = "";
