@@ -39,7 +39,7 @@ class CustomChatCommand extends Command implements PluginIdentifiableCommand {
                 case "options":
                     $sender->sendMessage(TextFormat::WHITE . "-==[ CustomChat Info ]==-");
                     $sender->sendMessage(TextFormat::WHITE . "PurePerms use :{PurePerms}");
-                    $sender->sendMessage(TextFormat::WHITE . "MassiveEconomy use :{Money}");
+                    $sender->sendMessage(TextFormat::WHITE . "EconomyAPI use :{Money}");
                     $sender->sendMessage(TextFormat::WHITE . "KillChat use :{Kill}");
                     $sender->sendMessage(TextFormat::WHITE . "KillChat use :{Deaths}");
                     break;
