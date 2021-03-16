@@ -20,3 +20,4 @@ A custom chat plugin for PocketMine-MP.
 ## Dependencies
 You will need to have the following plugins on your PocketMine-MP server to run this plugin:
 - [EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI)
+- [KillChat](https://github.com/EnderLands/KillChat)
