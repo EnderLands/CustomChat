@@ -43,7 +43,7 @@ use pocketmine\permission\Permission;
 use CustomChat\command\CustomChatCommand;
 use CustomChat\command\DisableChatCommand;
 use CustomChat\command\EnableChatCommand;
-use CustomChat\command\PlayerDefaultCommand
+use CustomChat\command\PlayerDefaultCommand;
 use CustomChat\command\PrefixCommand;
 use CustomChat\command\RemoveNicknameCommand;
 use CustomChat\command\SetNicknameCommand;
