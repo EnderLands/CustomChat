@@ -52,7 +52,6 @@ use CustomChat\command\SetTagCommand;
 use CustomChat\command\TagCommand;
 use CustomChat\command\WorldCommand;
 use CustomChat\event\EventListener;
-use KillChat\KillChat;
 
 class Main extends PluginBase implements CommandExecutor {
 
