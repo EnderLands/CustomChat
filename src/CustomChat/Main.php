@@ -62,8 +62,8 @@ class Main extends PluginBase implements CommandExecutor {
     private $playerstats;
     private static $instance = null;
 
+    public $playerConfig;
     public $config;
-    public $swCommand;
 
     public static function getInstance() {
         return self::$instance;
