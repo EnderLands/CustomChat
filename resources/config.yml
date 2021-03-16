@@ -1,0 +1,11 @@
+---
+chat-format: '§e{WORLD_NAME}:§e[§a{TAGS}§e][§2{PREFIX}§e]§e<§9{DISPLAY_NAME}§e> §e{MESSAGE}'
+enable-formatter: true
+disablechat: false
+default-player-prefix: MyPrefix
+default-player-tags: MyTags
+CustomChat options: '{Kills} | {Deaths} | [{Money}$] | {PurePerms}'
+CustomJoin: '@Player joined the server !'
+CustomLeave: '@Player leave the server !'
+per-world-chat: false
+...
