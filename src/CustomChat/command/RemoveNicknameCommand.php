@@ -1,5 +1,7 @@
 <?php
 
+namespace CustomChat\command;
+
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
