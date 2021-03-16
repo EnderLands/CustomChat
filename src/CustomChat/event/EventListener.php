@@ -16,7 +16,6 @@ use pocketmine\utils\TextFormat;
 use pocketmine\Server;
 use pocketmine\plugin\PluginBase;
 use CustomChat\Main;
-use KillChat\KillChat;
 use onebone\economyapi\EconomyAPI;
 
 class EventListener implements Listener {
@@ -92,8 +91,9 @@ class EventListener implements Listener {
         $isMultiWorldEnabled = $purePerms->getConfig()->get("enable-multiworld-formats");
         $levelName = $isMultiWorldEnabled ?  $player->getLevel()->getName() : null;
         $format = str_replace("{PurePerms}", $purePerms->getUser($player)->getGroup($levelName)->getName(), $format);
-        $format = str_replace("{Kills}", KillChat::getInstance()->getKills($player->getName()), $format); 
-        $format = str_replace("{Deaths}", KillChat::getInstance()->getDeaths($player->getName()), $format); 
+        $killChat = $this->plugin->getServer()->getPluginManager()->getPlugin("KillChat");
+        $format = str_replace("{Kills}", $killChat->getKills($player->getName()), $format); 
+        $format = str_replace("{Deaths}", $killChat->getDeaths($player->getName()), $format); 
         $format = str_replace("{Money}", EconomyAPI::getInstance()->myMoney($player->getName()), $format); 
         $format = str_replace("{WORLD_NAME}", $player->getLevel()->getName(), $format);
         $nick = $this->playerConfig->get($player->getName() . ".nick");
