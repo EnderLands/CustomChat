@@ -1,8 +1,8 @@
-<p align="center">
+<div align="center">
     <h1>
         CustomChat
     </h1>
-</p>
+</div>
 
 <p align="center">
     <img src="https://poggit.pmmp.io/ci.shield/EnderLands/CustomChat/~" alt="Build Status" />
